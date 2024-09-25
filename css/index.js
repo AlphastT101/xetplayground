@@ -163,7 +163,7 @@ async function process_request() {
             messages.push({ "role": "user", "content": prompt });
         }
 
-        const requestUrl = text_models.includes(model) ? 'https://api.xet.one/v1/chat/completions' : 'https://api.xet.one/v1/images/generations';
+        const requestUrl = text_models.includes(model) ? '/v1/chat/completions' : '/v1/images/generations';
         const requestBody = text_models.includes(model)
             ? JSON.stringify({ model: model, messages: messages })
             : JSON.stringify({ model: model, prompt: prompt });
