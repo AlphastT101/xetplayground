@@ -189,7 +189,7 @@ async function process_request() {
         const responseData = await response.json();
 
         if (text_models.includes(model)) {
-            let answer = responseData.response;
+            let answer = responseData.choices[0].message.content;
             messages.push({ "role": "assistant", "content": answer });
 
             const newResponseDiv = document.createElement('div');
