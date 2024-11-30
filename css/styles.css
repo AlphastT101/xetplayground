@@ -69,7 +69,7 @@ body {
 }
 .image-response img{
   border-radius: 20px;
-  max-width: 400px;
+  max-width: 370px;
 }
 .text-user{
   text-align: left;
@@ -217,7 +217,7 @@ pre {
 }
 
 
-#modelInput {
+#modelInput, #sizeInput {
   width: 227px;
   height: 34px;
   border-radius: 5px;
@@ -230,12 +230,12 @@ pre {
   font-size: 15px;
 }
 
-#modelInput option {
+#modelInput option, #sizeInput option {
   color: #FFFFFF;
   background-color: #262645;
 }
 
-#modelInput option:hover {
+#modelInput option:hover, #sizeInput option:hover {
   background-color: #212121;
 }
 

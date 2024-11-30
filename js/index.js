@@ -22,9 +22,25 @@ document.getElementById('closeSettings').addEventListener('click', function() {
     overlay.classList.remove('show');
     settingsWindow.classList.remove('show');
 });
-//// settings button end ////
 
 
+
+//// on model change ////
+function toggleImageSize() {
+    const modelInput = document.getElementById('modelInput');
+    const sizeInput = document.getElementById('sizeInput');
+    const sizeLabel = document.getElementById('sizeLabel');
+
+    const imageModels = ['poli', 'dalle3', 'sdxl-turbo', 'flux'];
+
+    if (imageModels.includes(modelInput.value)) {
+        sizeInput.style.display = 'inline-block';
+        sizeLabel.style.display = 'block';
+    } else {
+        sizeInput.style.display = 'none';
+        sizeLabel.style.display = 'none';
+    }
+}
 
 
 
@@ -117,6 +133,7 @@ async function process_request() {
     const prompt = document.getElementById('promptInput').value;
     const apiKey = document.getElementById('apiKeyInput').value;
     const model = document.getElementById('modelInput').value;
+    const size = document.getElementById('sizeInput').value;
     const chatHistory = document.querySelector('.chat-history');
     const btn = document.getElementById('send');
     const loading = document.getElementById('loading');
@@ -166,7 +183,7 @@ async function process_request() {
         const requestUrl = text_models.includes(model) ? 'https://api.xet.one/v1/chat/completions' : 'https://api.xet.one/v1/images/generations';
         const requestBody = text_models.includes(model)
             ? JSON.stringify({ model: model, messages: messages })
-            : JSON.stringify({ model: model, prompt: prompt });
+            : JSON.stringify({ model: model, prompt: prompt, size:size});
 
         document.getElementById('promptInput').value = ''; // Clear input after sending
         promptInput.style.height = '38px'; // Reset to default height

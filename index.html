@@ -32,7 +32,7 @@
     <div class="overlay" id="overlay"></div>
     <div class="settings" id="settingsWindow">
         <p style="color: white;"><i class="fa-duotone fa-solid fa-microchip-ai" style="font-size: 20px;"></i> Choose a model:</p>
-        <select id="modelInput">
+        <select id="modelInput" onchange="toggleImageSize()">
             <option value="poli">Polinations.ai (image)</option>
             <option value="dalle3">Dalle-3 (image)</option>
             <option value="sdxl-turbo">SDXL-Turbo (image)</option>
@@ -56,6 +56,13 @@
             <option value="mythomist-7b">Mythomist-7b</option>
             <option value="toppy-m-7b">Toppy-M-7b</option>
             <option value="zephyr-7b-beta">Zephyr-7b-beta</option> -->
+        </select> <br>
+
+        <p style="color: white;" id="sizeLabel"><i class="fa-duotone fa-solid fa-arrows-maximize" style="font-size: 20px;"></i> Choose a image size:</p>
+        <select id="sizeInput">
+            <option value="1024x1024">1024x1024</option>
+            <option value="1792x1024">1792x1024</option>
+            <option value="1024x1792">1024x1792</option>
         </select> <br>
 
         <p style="color: white;"><i class="fa-duotone fa-solid fa-key" style="font-size: 20px;"></i> Your API key: </p>
