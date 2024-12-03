@@ -24,7 +24,6 @@ document.getElementById('closeSettings').addEventListener('click', function() {
 });
 
 
-
 //// on model change ////
 function toggleImageSize() {
     const modelInput = document.getElementById('modelInput');
