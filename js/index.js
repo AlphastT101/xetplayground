@@ -30,7 +30,7 @@ function toggleImageSize() {
     const sizeInput = document.getElementById('sizeInput');
     const sizeLabel = document.getElementById('sizeLabel');
 
-    const imageModels = ['poli', 'dalle3', 'sdxl-turbo', 'flux'];
+    const imageModels = ['poli', 'sdxl-turbo', 'flux-dev', 'flux-schnell'];
 
     if (imageModels.includes(modelInput.value)) {
         sizeInput.style.display = 'inline-block';

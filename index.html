@@ -34,9 +34,9 @@
         <p style="color: white;"><i class="fa-duotone fa-solid fa-microchip-ai" style="font-size: 20px;"></i> Choose a model:</p>
         <select id="modelInput" onchange="toggleImageSize()">
             <option value="poli">Polinations.ai (image)</option>
-            <option value="dalle3">Dalle-3 (image)</option>
             <option value="sdxl-turbo">SDXL-Turbo (image)</option>
-            <option value="flux">Flux (image)</option>
+            <option value="flux-dev">Flux-Dev (image)</option>
+            <option value="flux-schnell">Flux-Schnell (image)</option>
             <!-- <option value="gpt-4o">GPT-4o</option> -->
             <option value="gpt-4-turbo">GPT-4-Turbo</option>
             <option value="gpt-4">GPT-4</option>
@@ -61,8 +61,11 @@
         <p style="color: white;" id="sizeLabel"><i class="fa-duotone fa-solid fa-arrows-maximize" style="font-size: 20px;"></i> Choose a image size:</p>
         <select id="sizeInput">
             <option value="1024x1024">1024x1024</option>
-            <option value="1792x1024">1792x1024</option>
-            <option value="1024x1792">1024x1792</option>
+            <option value="1024x576">1024x576</option>
+            <option value="1024x768">1024x768</option>
+            <option value="512x512">512x512</option>
+            <option value="576x1024">576x1024</option>
+            <option value="786x1024">786x1024</option>            
         </select> <br>
 
         <p style="color: white;"><i class="fa-duotone fa-solid fa-key" style="font-size: 20px;"></i> Your API key: </p>
