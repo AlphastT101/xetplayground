@@ -280,7 +280,7 @@ function startup_load() {
             document.getElementsByClassName("chat-history")[0].style.opacity = 1
             document.getElementsByClassName("utils")[0].style.opacity = 1
             document.getElementsByClassName("logo")[0].style.opacity = 1
-        }, 2000); // Adjust delay as needed
+        }, 1000); // Adjust delay as needed
     });
 }
 

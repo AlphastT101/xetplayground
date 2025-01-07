@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LuminaryAI API</title>
+    <title>XET AI</title>
+    <link rel="icon" type="image/png" href="/css/images/logo.png">
 
     <link rel="stylesheet" href="/css/prism.css">
     <link rel="stylesheet" href="/css/styles.css">
@@ -13,7 +14,7 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
 
-    <!-- Font awsome premium links -->w
+    <!-- Font awsome premium links -->
     <!-- <link rel="stylesheet" data-purpose="Layout StyleSheet" title="Web Awesome" href="/css/app-wa-09b459cf485d4b1f3304947240314c05.css?vsn=d"> THIS IS USELESS -->
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.6.0/css/all.css">
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.6.0/css/sharp-duotone-solid.css">
@@ -31,7 +32,7 @@
 
     <div class="overlay" id="overlay"></div>
     <div class="settings" id="settingsWindow">
-        <p style="color: white;"><i class="fa-duotone fa-solid fa-microchip-ai" style="font-size: 20px;"></i> Choose a model:</p>
+        <p style="color: white;"><i class="fa-duotone fa-solid fa-microchip-ai" style="font-size: 20px;"></i> Model</p>
         <select id="modelInput" onchange="toggleImageSize()">
             <option value="poli">Polinations.ai (image)</option>
             <option value="sdxl-turbo">SDXL-Turbo (image)</option>
@@ -47,30 +48,20 @@
             <option value="llama-3">Llama-3</option>
             <option value="llama-3.1">Llama-3.1</option>
             <option value="gemma-2">Gemma-2</option>
-
-            <!-- <option value="qwen-2-7b-instruct">Qwen-2-7b-instruct</option>
-            <option value="phi-3-mini-128k-instruct">Phi-3-mini-128k-instruct</option>
-            <option value="phi-3-medium-128k-instruct">Phi-3-medium-128k-instruct</option>
-            <option value="gemma-7b-it">Gemma-7b-it</option>
-            <option value="nous-capybara-7b">Nous-Capybara-7b</option>
-            <option value="mythomist-7b">Mythomist-7b</option>
-            <option value="toppy-m-7b">Toppy-M-7b</option>
-            <option value="zephyr-7b-beta">Zephyr-7b-beta</option> -->
         </select> <br>
 
-        <p style="color: white;" id="sizeLabel"><i class="fa-duotone fa-solid fa-arrows-maximize" style="font-size: 20px;"></i> Choose a image size:</p>
+        <p style="color: white;" id="sizeLabel"><i class="fa-duotone fa-solid fa-arrows-maximize" style="font-size: 20px;"></i> Image size</p>
         <select id="sizeInput">
             <option value="1024x1024">1024x1024</option>
             <option value="1024x576">1024x576</option>
             <option value="1024x768">1024x768</option>
             <option value="512x512">512x512</option>
             <option value="576x1024">576x1024</option>
-            <option value="786x1024">786x1024</option>
-            
+            <option value="768x1024">768x1024</option>
         </select> <br>
 
-        <p style="color: white;"><i class="fa-duotone fa-solid fa-key" style="font-size: 20px;"></i> Your API key: </p>
-        <input type="password" id="apiKeyInput" placeholder="Enter API key" style="background-color: #252d47;"><br><br>
+        <p style="color: white;"><i class="fa-duotone fa-solid fa-key" style="font-size: 20px;"></i> API key</p>
+        <input type="password" id="apiKeyInput" placeholder="Enter API key"><br><br>
         <button type="button" id="closeSettings" class="closeSettings"><i class="fa-duotone fa-solid fa-floppy-disk-circle-arrow-right"></i>  Save</button>
     </div>
 
@@ -79,23 +70,26 @@
         <div class="text-user"> <i class="fa-solid fa-user"></i> You: <p>Hi</p> </div>
         <div class="image-response">
             <i class="fa-duotone fa-solid fa-microchip-ai" style="font-size: 25px;"></i> <bold>AI:</bold>
-            <p>Hello! This is LuminaryAI's API playground. It's very simple to use. Just set your API token
-                by clicking the settings icon at the bottom of your screen and choose a model. Enjoy :)
+            <p>Hi! This is XET's API playground. It's very simple to use. Just set your API token
+                by clicking the config icon at the bottom of your screen and choose a model.<br>
+                <li>Found bugs? let us know at xet@xet.one.</li>
+                <li>Don't have an API token? <a href="https://xet.one/dashboard" style="text-decoration: none;" target="_blank">Dashboard</a> To generate one!</li>
+                <li>Join <a href=" https://discord.com/invite/hmMBe8YyJ4" style="text-decoration: none;" target="_blank">Discord</a> for more info.</li>
             </p>
+            <hr>
             <!-- <img src="http://127.0.0.1:6077/cache/8c247cba.png"> -->
         </div>
     </div>
 
-    <div class="utils container" style="max-width: 1000px;">
+    <div class="container utils" style="max-width: 1000px;">
         <div class="row d-flex align-items-start">
-            <div class="col-auto"><button type="button" id="settings"><i class="fa-duotone fa-solid fa-sliders"></i></button></div>
+            <div class="col-auto"><button type="button" id="config-button"><i class="fa-duotone fa-solid fa-sliders"></i></button></div>
             <div class="col">
                 <textarea id="promptInput" placeholder="Message AI" rows="1"></textarea>
             </div>                     
 
             <div class="col-auto"><button type="button" id="send"><i class="fa-duotone fa-solid fa-paper-plane-top"></i></button></div>
             <div id="loading"></div>
-
         </div>
     </div>
 

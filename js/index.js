@@ -1,5 +1,5 @@
 //// Settings button start ////
-document.getElementById('settings').addEventListener('click', function() {
+document.getElementById('config-button').addEventListener('click', function() {
     const overlay = document.getElementById('overlay');
     const settingsWindow = document.getElementById('settingsWindow');
 
@@ -55,7 +55,6 @@ document.getElementById('send').addEventListener('click', async function() {
 });
 
 const promptInput = document.getElementById('promptInput');
-
 promptInput.addEventListener('input', function () {
     // Reset the height to calculate the new scrollHeight
     this.style.height = 'auto';
@@ -65,20 +64,22 @@ promptInput.addEventListener('input', function () {
 
 promptInput.addEventListener('keypress', function (event) {
     if (event.key === 'Enter' && !event.shiftKey) {
-        event.preventDefault(); // Prevents the default behavior of the Enter key
+        event.preventDefault();
         process_request();
     }
 });
 
 async function formatText(answer) {
-
     answer = escapeHTML(answer);
+
     // Code Block: ```language code ```
     answer = answer.replace(/```(\w+)?\n([\s\S]*?)```/g,
-        '<pre class="code-block-wrapper"><button class="copy-btn">Copy</button><code class="language-$1">$2</code></pre>');
-
-    // Combining Formatting: __**Bold and Underlined**__
-    answer = answer.replace(/__\*\*(.*?)\*\*__/g, '<u><strong>$1</strong></u>');
+        (match, lang, code) => {
+            // Escape any additional backticks inside the code block
+            code = code.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+            return `<pre class="code-block-wrapper"><button class="copy-btn">Copy</button><code class="language-${lang || 'plaintext'}">${code}</code></pre>`;
+        }
+    );
 
     // Bold + Italic: ***text***
     answer = answer.replace(/\*\*\*(.*?)\*\*\*/g, '<strong><em>$1</em></strong>');
@@ -86,11 +87,8 @@ async function formatText(answer) {
     // Bold: **text**
     answer = answer.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
 
-    // Italic: *text* or _text_
-    answer = answer.replace(/(\*|_)(.*?)\1/g, '<em>$2</em>');
-
-    // Underline: __text__
-    //answer = answer.replace(/__(.*?)__/g, '<u>$1</u>');
+    // Italic: *text*
+    answer = answer.replace(/(\*)(.*?)\1/g, '<em>$2</em>');
 
     // Strikethrough: ~~text~~
     answer = answer.replace(/~~(.*?)~~/g, '<del>$1</del>');
@@ -117,6 +115,7 @@ async function formatText(answer) {
 
     return answer;
 }
+
 
 function escapeHTML(html) {
     return html
@@ -158,28 +157,30 @@ async function process_request() {
             throw new Error("You must set your API key and a message to get a response.");
         }
 
-        window.scrollTo({
-            top: document.body.scrollHeight,
-            behavior: 'smooth'
-        });
-
         const newUserDiv = document.createElement('div');
         newUserDiv.className = 'text-user';
         newUserDiv.dataset.aos = 'fade'; // Set data-aos attribute
 
         const formatted_prompt = await formatText(prompt);
+        const formatted_prompt_with_newlines = formatted_prompt.replace(/\n/g, '<br>');
         newUserDiv.innerHTML = `
             <i class="fa-solid fa-user"></i> You:
-            <p>${formatted_prompt}</p>
+            <p>${formatted_prompt_with_newlines}</p>
         `;
         chatHistory.appendChild(newUserDiv);
         Prism.highlightAll();
+
+        window.scrollTo({
+            top: document.body.scrollHeight,
+            behavior: 'smooth'
+        });
 
         if (text_models.includes(model)) {
             messages.push({ "role": "user", "content": prompt });
         }
 
         const requestUrl = text_models.includes(model) ? 'https://api.xet.one/v1/chat/completions' : 'https://api.xet.one/v1/images/generations';
+        // const requestUrl = text_models.includes(model) ? 'http://192.168.0.102:6750/v1/chat/completions': 'http://192.168.0.102:6750/v1/images/generations'
         const requestBody = text_models.includes(model)
             ? JSON.stringify({ model: model, messages: messages })
             : JSON.stringify({ model: model, prompt: prompt, size:size});
@@ -240,6 +241,7 @@ async function process_request() {
 
     } catch (error) {
         console.error(error);
+        console.error(response.statusText)
         showError(error.message);
     } finally {
         setUIBusyState(false);
