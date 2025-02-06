@@ -1,7 +1,7 @@
 body {
   height: 100vh;
   margin: 0; /* Remove default margin */
-  background: linear-gradient(to bottom, #27232b, #090910) fixed;
+  background: linear-gradient(to bottom, #000000, #000000) fixed;
   background-repeat: no-repeat;
 }
 
@@ -10,14 +10,6 @@ body {
   100% {opacity: 1;}
 }
 
-.logo, .chat-history, .utils{
-  opacity: 0;
-  transition: opacity 0.7s ease-in-out, visibility 1s ease-in-out;
-
-  animation-name: fadee;
-  animation-duration: 2s;
-  visibility: hidden;
-}
 
 .logo {
   position: fixed;
@@ -54,11 +46,10 @@ body {
 
 .chat-history{
   padding: 10px;
-  /* margin-top: 20px; */
 }
 
 
-.text-response, .image-response{
+.text-response, .image-response, .error-response{
   text-align: left;
   color: white;
   font-size: 1rem;
@@ -68,6 +59,13 @@ body {
   position: relative;
   backdrop-filter: blur(3px);
 }
+
+.error-response{
+  background-color: #5a0000;;
+  padding: 10px;
+  border-radius: 20px;
+}
+
 .image-response img{
   border-radius: 20px;
   max-width: 370px;
@@ -80,7 +78,7 @@ body {
   color: white;
   border-radius: 15px;
   padding: 10px;
-  background-color: #3b3740;
+  background-color: #1e1e1e;
   margin-left: auto;
   margin-top: 20px;
   z-index: 2;
@@ -121,7 +119,7 @@ pre {
 
 
 .utils {
-  background-color: rgb(37, 29, 43);
+  background-color: rgb(27, 27, 27);
   margin: 20px;
   text-align: center;
   border-radius: 20px;
@@ -135,7 +133,7 @@ pre {
 }
 
 #config-button{
-  background-color: rgb(37, 29, 43);
+  background-color: rgb(27, 27, 27);
   padding: 10px 12px;
   color: rgb(141, 223, 165);
   border: none;
@@ -143,7 +141,7 @@ pre {
 }
 
 #promptInput {
-  background-color: rgb(37 29 43);
+  background-color: rgb(27, 27, 27);
   color: #ffffff;
   padding: 8px 0px;
   font-size: 16px;
@@ -153,14 +151,14 @@ pre {
   height: auto;
 
   box-sizing: border-box;
-  line-height: 22px; /* Adjust according to the font size */
-  min-height: 22px; /* Minimum height for 1 row */
-  max-height: 242px; /* Maximum height for 11 rows (22px per row * 11 rows) */
-  resize: none; /* Prevents resizing */
+  line-height: 22px;
+  min-height: 22px;
+  max-height: 242px;
+  resize: none;
   overflow: hidden;
 
-  overflow-y: auto; /* Show vertical scrollbar when needed */
-  overflow-x: hidden; /* Hide horizontal scrollbar */
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 #promptInput::placeholder {color: #8a8a8a;}
 
@@ -180,14 +178,14 @@ pre {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: rgb(46 45 65);
+  background-color: rgb(27 26 33);
   padding: 30px;
   z-index: 1001;
-  border-radius: 10px;
+  border-radius: 30px;
   opacity: 0;
   transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+  border: 1px solid #5c5c5c;
 }
-
 .overlay {
   visibility: hidden;
   position: fixed;
@@ -200,7 +198,6 @@ pre {
   opacity: 0;
   transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
 }
-
 .overlay.show,
 .settings.show {
   visibility: visible;
@@ -210,7 +207,7 @@ pre {
 .closeSettings {
   border-radius: 10px;
   border: none;
-  background-color: rgb(80, 79, 107);
+  background-color: rgb(48 48 59);
   padding: 10px;
   margin: 0px 30%;
   color: white;
@@ -222,12 +219,14 @@ pre {
   background-color: rgb(59, 58, 78);
 }
 
+
+
 #modelInput, #sizeInput {
   width: 227px;
   height: 34px;
   border-radius: 5px;
 
-  background-color: #252d47;
+  background-color: #1b2031;
   color: #bdbdbd;
   border: .5px solid #3f4d7a;
   border-radius: 5px;
@@ -255,13 +254,13 @@ pre {
   border: none;
   outline: none;
   border-radius: 15px;
-  background-color: #252d47;
+  background-color: #1b2031;
   box-shadow: inset 2px 5px 10px rgba(0,0,0,0.3);
   transition: 300ms ease-in-out;
 }
 #apiKeyInput:focus {
   transform: scale(1.05);
-  box-shadow: 10px 10px 50px #969696, -10px -10px 50px #ffffff;
+  /* box-shadow: 10px 10px 50px #969696, -10px -10px 50px #ffffff; */
 }
 
 #apiKeyInput::placeholder{
@@ -292,7 +291,14 @@ pre {
   background-color: #555; /* Darker color when hovering over the scrollbar */
 }
 
-/* From Uiverse.io by ZacharyCrespin */ 
+
+
+
+
+
+
+
+
 #loading {
   --size: 14px;
   --color: white;

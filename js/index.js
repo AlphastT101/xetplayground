@@ -45,9 +45,12 @@ function toggleImageSize() {
 
 //// API requests start ////
 const text_models = [
-    'gpt-4', 'gpt-4-turbo', 'gpt-3.5', 'gpt-3.5-turbo',
-    'llama-3','llama-3.1', 'gemma-2', 'mistral', 'gpt-4o',
-    'command-r-plus-online'
+'llama-3.3-70b-turbo', 'phi-4', 'deepseek-r1', 'deepseek-v3',
+'deepseek-r1-llama-3.3-70b-distill', 'lunaris-l3-8b', 'wazardlm-2-8x22b',
+'mythomax-13b', 'mistral-nemo', 'gemini-1.5-flash', 'gemini-1.5-pro',
+'gemma-2-27b', 'gemma-2-9b-turbo', 'llama-3-70b-intruct', 'llama-3.1-70b',
+'llama-3.1-70b-instruct', 'llama-3.1-8b-turbo', 'llama-3.3-70b', 'qwen-2.5-coder-32b',
+'qwq-32b'
 ];
 
 document.getElementById('send').addEventListener('click', async function() {
@@ -56,9 +59,7 @@ document.getElementById('send').addEventListener('click', async function() {
 
 const promptInput = document.getElementById('promptInput');
 promptInput.addEventListener('input', function () {
-    // Reset the height to calculate the new scrollHeight
     this.style.height = 'auto';
-    // Set the height to the scrollHeight, but limit it to a max height
     this.style.height = `${Math.min(this.scrollHeight, 242)}px`;
 });
 
@@ -136,6 +137,7 @@ async function process_request() {
     const btn = document.getElementById('send');
     const loading = document.getElementById('loading');
     const errorWindow = document.getElementById('errorWindow');
+
     // disable buttons
     function setUIBusyState(isBusy) {
         btn.style.display = isBusy ? 'none' : 'inline-block';
@@ -143,11 +145,11 @@ async function process_request() {
     }
     // error message
     function showError(message) {
-        errorWindow.textContent = message;
-        errorWindow.classList.add('show');
-        setTimeout(() => {
-            errorWindow.classList.remove('show');
-        }, 6000); // Hide after 6 seconds
+        const errorDiv = document.createElement('div');
+        errorDiv.className = 'error-response';
+        errorDiv.dataset.aos = 'fade';
+        errorDiv.innerHTML = message;
+        chatHistory.appendChild(errorDiv)
     }
 
     setUIBusyState(true); // disable btn
@@ -211,7 +213,7 @@ async function process_request() {
 
             const newResponseDiv = document.createElement('div');
             newResponseDiv.className = 'text-response';
-            newResponseDiv.dataset.aos = 'fade'; // Set data-aos attribute
+            newResponseDiv.dataset.aos = 'fade';
 
             const formatted_answer = await formatText(answer);
             newResponseDiv.innerHTML = `
@@ -241,7 +243,6 @@ async function process_request() {
 
     } catch (error) {
         console.error(error);
-        console.error(response.statusText)
         showError(error.message);
     } finally {
         setUIBusyState(false);
