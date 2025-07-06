@@ -30,7 +30,7 @@ function toggleImageSize() {
     const sizeInput = document.getElementById('sizeInput');
     const sizeLabel = document.getElementById('sizeLabel');
 
-    const imageModels = ['poli', 'sdxl-turbo', 'flux-dev', 'flux-schnell'];
+    const imageModels = ['sdxl-turbo', 'flux'];
 
     if (imageModels.includes(modelInput.value)) {
         sizeInput.style.display = 'inline-block';
@@ -182,7 +182,6 @@ async function process_request() {
         }
 
         const requestUrl = text_models.includes(model) ? 'https://api.xet.one/v1/chat/completions' : 'https://api.xet.one/v1/images/generations';
-        // const requestUrl = text_models.includes(model) ? 'http://192.168.0.102:6750/v1/chat/completions': 'http://192.168.0.102:6750/v1/images/generations'
         const requestBody = text_models.includes(model)
             ? JSON.stringify({ model: model, messages: messages })
             : JSON.stringify({ model: model, prompt: prompt, size:size});
