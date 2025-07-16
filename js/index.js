@@ -45,12 +45,7 @@ function toggleImageSize() {
 
 //// API requests start ////
 const text_models = [
-'llama-3.3-70b-turbo', 'phi-4', 'deepseek-r1', 'deepseek-v3',
-'deepseek-r1-llama-3.3-70b-distill', 'lunaris-l3-8b', 'wazardlm-2-8x22b',
-'mythomax-13b', 'mistral-nemo', 'gemini-1.5-flash', 'gemini-1.5-pro',
-'gemma-2-27b', 'gemma-2-9b-turbo', 'llama-3-70b-intruct', 'llama-3.1-70b',
-'llama-3.1-70b-instruct', 'llama-3.1-8b-turbo', 'llama-3.3-70b', 'qwen-2.5-coder-32b',
-'qwq-32b'
+
 ];
 
 document.getElementById('send').addEventListener('click', async function() {
