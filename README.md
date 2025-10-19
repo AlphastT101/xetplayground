@@ -1,6 +1,6 @@
-# XET Playground
+# Lumixcore Playground
 
-This repo includes codebase for the XET AI Playground.
+This repo includes codebase for the Lumixcore Playground.
 <hr>
 
 # Features
